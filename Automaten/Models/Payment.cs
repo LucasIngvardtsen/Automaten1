@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Automaten.Models
 {
-    internal class Payment
+    public class Payment
     {
         public int _balance;
         public Payment()

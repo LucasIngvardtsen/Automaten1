@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Automaten.Repos
 {
-    internal class VendingMachineRepo
+    public class VendingMachineRepo
     {
     }
 }

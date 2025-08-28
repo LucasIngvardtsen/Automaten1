@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Automaten.Services
 {
-    internal class VendingMachineService
+    public class VendingMachineService
     {
     }
 }

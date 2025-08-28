@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Automaten.Repos
 {
-    internal interface IVendingMachine
+    public interface IVendingMachine
     {
     }
 }
