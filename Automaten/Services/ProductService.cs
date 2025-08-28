@@ -28,7 +28,10 @@ namespace Automaten.Services
                 product.Stock += quantity; _productRepo.SaveProducts(products); 
             } 
         }
-        public List<Product> LoadProducts() { return _productRepo.GetAllProducts(); }
+        public List<Product> LoadProducts() 
+        { 
+            return _productRepo.GetAllProducts(); 
+        }
 
 
 
