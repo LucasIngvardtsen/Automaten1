@@ -8,5 +8,8 @@ namespace Automaten.Repos
 {
     public interface IProduct
     {
+
+        void Add(Product product);
+        void Remove(Product product);
     }
 }
