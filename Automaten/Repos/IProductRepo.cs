@@ -12,7 +12,8 @@ namespace Automaten.Repos
 
         List<Product> GetAllProducts();
         void SaveProducts(List<Product> products);
-            
-        
+
+        void Add(Product product);
+        void Remove(Product product);
     }
 }
