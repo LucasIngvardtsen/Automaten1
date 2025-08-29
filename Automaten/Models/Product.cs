@@ -17,7 +17,7 @@ namespace Automaten.Models
         public Product(string name, int price, int stock)
         {
             Name = name;
-            Price = price;
+            Price = price; 
             Stock = stock;
         }
     }
