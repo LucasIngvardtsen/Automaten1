@@ -8,10 +8,14 @@ namespace Automaten.Models
 {
     public class VendingMachine
     {
-           
+
+            
         
+        
+
+
         //private List<Product> _products;
         //    private int paymentSum;
-        
+
     }
 }
