@@ -10,6 +10,9 @@ namespace Automaten.Repos
     public interface IProductRepo
     {
 
+
+
+
         //List<Product> GetAllProducts();
         //void SaveProducts(List<Product> products);
 
