@@ -11,6 +11,7 @@ namespace Automaten.Services
     public class VendingMachineService
     {
         private ProductRepo repo = new ProductRepo();
+        //private CoinBankRepo coinrepo = new CoinBankRepo();
 
         public Product Purchase(string name)
         {
