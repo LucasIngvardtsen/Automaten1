@@ -45,12 +45,12 @@ namespace Automaten
             spriteQueue.Enqueue("Sprite");
             spriteQueue.Enqueue("Sprite");
 
-            //Queue<string> fantaexoticQueue = new Queue<string>();
-            //fantaexoticQueue.Enqueue("Fanta Exotic");
-            //fantaexoticQueue.Enqueue("Fanta Exotic");
-            //fantaexoticQueue.Enqueue("Fanta Exotic");
-            //fantaexoticQueue.Enqueue("Fanta Exotic");
-            //fantaexoticQueue.Enqueue("Fanta Exotic");
+            Queue<string> fantaexoticQueue = new Queue<string>();
+            fantaexoticQueue.Enqueue("Fanta Exotic");
+            fantaexoticQueue.Enqueue("Fanta Exotic");
+            fantaexoticQueue.Enqueue("Fanta Exotic");
+            fantaexoticQueue.Enqueue("Fanta Exotic");
+            fantaexoticQueue.Enqueue("Fanta Exotic");
 
 
             switch (input)
