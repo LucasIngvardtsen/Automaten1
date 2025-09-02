@@ -8,5 +8,6 @@ namespace Automaten.Repos
 {
     public class VendingMachineRepo
     {
+
     }
 }

@@ -7,106 +7,76 @@ namespace Automaten
     {
         static void Main(string[] args)
         {
-            VendingMachineService service = new VendingMachineService();
+            VendingMachineService service = new VendingMachineService(); // Opret produkter
 
-            Product cola = new Product("Cola", 15);
+            Product cola = new Product { Name = "Cola", Price = 15 };
+            Product fanta = new Product { Name = "Fanta", Price = 14 };
+            Product skumbanan = new Product { Name = "Skumbanan", Price = 10 }; // Vis produkter
 
-            // Keep track of inserted coins
-            List<CoinBank> userCoins = new List<CoinBank>();
+            Console.WriteLine("Vælg et produkt:");
+            Console.WriteLine($"{cola.Name} - {cola.Price} kr");
+            Console.WriteLine($"{fanta.Name} - {fanta.Price} kr");
+            Console.WriteLine($"{skumbanan.Name} - {skumbanan.Price} kr"); // Keep track of inserted coins
+
             int totalInserted = 0;
-
-            Console.WriteLine($"The price of {cola.Name} is {cola.Price} kr.");
-
-            while (totalInserted < cola.Price)
-            {
-                Console.Write("Insert coin (5, 10, 20): ");
-                string input = Console.ReadLine();
-                int coinValue;
-
-                if (int.TryParse(input, out coinValue) && (coinValue == 5 || coinValue == 10 || coinValue == 20))
-                {
-                    userCoins.Add(new CoinBank(coinValue));
-                    totalInserted += coinValue;
-                    Console.WriteLine($"Total inserted: {totalInserted} kr");
-                }
-                else
-                {
-                    Console.WriteLine("Invalid coin. Try 5, 10, or 20 kr.");
-                }
-            }
-
-            Console.WriteLine($"Payment complete! You can buy the {cola.Name}.");
-            int change = totalInserted - cola.Price;
-
-            if (change > 0)
-                Console.WriteLine($"Your change: {change} kr");
-
-            //Console.WriteLine("Indkast venligst pengene til det ønskede produkt. Automaten tager kun imod 5, 10 og 20 kr.");
-            //string coininsert = Console.ReadLine();
-
-            //switch (coininsert)
-            //{
-            //    case "5":
-            //        Console.WriteLine("Der er nu +5 kr i maskinen");
-            //        break;
-            //    case "10":
-            //        Console.WriteLine("Der er nu +10 kr i maskinen");
-            //        break;
-            //    case "20":
-            //        Console.WriteLine("Der er nu +20 kr i maskinen");
-            //        break;
-            //    default:
-            //        Console.WriteLine("Ugyldigt beløb indkastet.");
-            //        break;
-
-            //}
-
-            //Console.WriteLine("Indsæt flere penge? eller skriv færdig");
-            //string coininsert2 = Console.ReadLine();
-
-            //switch (coininsert2)
-            //{
-            //    case "5":
-            //        Console.WriteLine("Der er nu +5 kr i maskinen");
-            //        break;
-            //    case "10":
-            //        Console.WriteLine("Der er nu +10 kr i maskinen");
-            //        break;
-            //    case "20":
-            //        Console.WriteLine("Der er nu +20 kr i maskinen");
-            //        break;
-            //    case "færdig":
-            //        Console.WriteLine("Du har tastet færdig");
-            //        break;
-            //    default:
-            //        Console.WriteLine("Ugyldigt beløb indkastet.");
-            //        break;
-
-            //}
-
 
             while (true)
             {
-                Console.Write("Vælg et produkt (Cola/Fanta/Skumbanan) eller 'exit': ");
-                string choice = Console.ReadLine();
+                Console.Write("Indsæt mønt (5, 10, 20), skriv 'køb' for at vælge et produkt eller '9' for at annullere: ");
+                string input = Console.ReadLine();
+                int coinValue;
 
-                if (choice.ToLower() == "exit")
-                    break;
-
-                Product bought = service.Purchase(choice);
-
-                if (bought != null)
+                if (input.ToLower() == "køb")
                 {
-                    Console.WriteLine("Du har købt en " + bought.Name + " til " + bought.Price + " kr.");
-                    int stockLeft = service.CheckStock(choice);
-                    Console.WriteLine("Der er nu " + stockLeft + " tilbage på lager.");
+                    Console.Write("Indtast produktnavn (Cola, Fanta, Skumbanan): ");
+                    string productName = Console.ReadLine();
+
+                    Product selectedProduct = null;
+
+                    if (productName.Equals("Cola", StringComparison.OrdinalIgnoreCase))
+                        selectedProduct = cola;
+                    else if (productName.Equals("Fanta", StringComparison.OrdinalIgnoreCase))
+                        selectedProduct = fanta;
+                    else if (productName.Equals("Skumbanan", StringComparison.OrdinalIgnoreCase))
+                        selectedProduct = skumbanan; // Tjek om produktet er valgt og om der er tilstrækkelige penge
+
+                    if (selectedProduct != null)
+                    {
+                        if (totalInserted >= selectedProduct.Price)
+                        {
+                            int change = totalInserted - selectedProduct.Price;
+                            Console.WriteLine($"Du har købt en {selectedProduct.Name} til {selectedProduct.Price} kr.");
+
+                            if (change > 0)
+                                Console.WriteLine($"Dine byttepenge: {change} kr");
+                            break; // Afslut programmet efter køb
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ikke nok penge til at købe produktet. Indsæt flere mønter.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ugyldigt produkt. Prøv igen.");
+                    }
+                }
+                else if (input == "9")
+                {
+                    Console.WriteLine($"Ordren er annulleret. Du får dine penge tilbage: {totalInserted} kr.");
+                    totalInserted = 0; // Nulstil indsat beløb
+                }
+                else if (int.TryParse(input, out coinValue) && (coinValue == 5 || coinValue == 10 || coinValue == 20))
+                { // Indsæt mønt
+                    service.InsertCoin(coinValue);
+                    totalInserted += coinValue;
+                    Console.WriteLine($"Total indsat: {totalInserted} kr");
                 }
                 else
                 {
-                    Console.WriteLine("Udsolgt eller ugyldigt valg!");
+                    Console.WriteLine("Ugyldig mønt. Prøv 5, 10 eller 20 kr.");
                 }
             }
-
         }
     }
 }

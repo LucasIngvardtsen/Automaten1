@@ -11,7 +11,12 @@ namespace Automaten.Services
     public class VendingMachineService
     {
         private ProductRepo repo = new ProductRepo();
-        //private CoinBankRepo coinrepo = new CoinBankRepo();
+        private ICoinBank coinBank;
+
+        public VendingMachineService()
+        {
+            coinBank = new CoinBankRepo(); // Initialiserer coinBank som CoinBankRepo
+        }
 
         public Product Purchase(string name)
         {
@@ -21,6 +26,11 @@ namespace Automaten.Services
         public int CheckStock(string name)
         {
             return repo.GetStock(name);
+        }
+
+        public void InsertCoin(int coin)
+        {
+            coinBank.InsertCoin(coin); // Kalder InsertCoin på coinBank
         }
     }
 }
