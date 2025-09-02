@@ -8,10 +8,12 @@ namespace Automaten.Repos
 {
     public interface ICoinBank
     {
-        void InsertCoin(int coin); 
-        int GetTotal(); 
-        void Reset(); 
-        List<int> ReturnChange(int amount);
+        void InsertCoin(int coin);              // Indsæt en mønt i banken
+        int GetTotal();                         // Beregn det samlede beløb i banken
+        void Reset();                           // Nulstil møntbanken
+        List<int> ReturnChange(int amount);     // Returner byttepenge
+        int TakeCoin(int value);                // Tag en mønt af den angivne værdi
+        int GetStock(int value);                // Tjek lagerstatus for en mønttype
     }
 }
 

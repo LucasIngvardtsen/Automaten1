@@ -10,7 +10,7 @@ using Automaten.Models;
 
 namespace Automaten.Repos
 {
-    public class ProductRepo
+    public class ProductRepo : IProductRepo
     {
         public Queue<Product> ColaQueue = new Queue<Product>();
         public Queue<Product> FantaQueue = new Queue<Product>();
@@ -26,11 +26,11 @@ namespace Automaten.Repos
 
         public Product BuyProduct(string name)
         {
-            if (name == "Cola" && ColaQueue.Count > 0)
+            if (name.Equals("Cola", StringComparison.OrdinalIgnoreCase) && ColaQueue.Count > 0)
                 return ColaQueue.Dequeue();
-            else if (name == "Fanta" && FantaQueue.Count > 0)
+            else if (name.Equals("Fanta", StringComparison.OrdinalIgnoreCase) && FantaQueue.Count > 0)
                 return FantaQueue.Dequeue();
-            else if (name == "Skumbanan" && SkumbananQueue.Count > 0)
+            else if (name.Equals("Skumbanan", StringComparison.OrdinalIgnoreCase) && SkumbananQueue.Count > 0)
                 return SkumbananQueue.Dequeue();
             else
                 return null; // Udsolgt eller findes ikke
@@ -38,9 +38,9 @@ namespace Automaten.Repos
 
         public int GetStock(string name)
         {
-            if (name == "Cola") return ColaQueue.Count;
-            if (name == "Fanta") return FantaQueue.Count;
-            if (name == "Skumbanan") return SkumbananQueue.Count;
+            if (name.Equals("Cola", StringComparison.OrdinalIgnoreCase)) return ColaQueue.Count;
+            if (name.Equals("Fanta", StringComparison.OrdinalIgnoreCase)) return FantaQueue.Count;
+            if (name.Equals("Skumbanan", StringComparison.OrdinalIgnoreCase)) return SkumbananQueue.Count;
             return 0;
         }
     }
