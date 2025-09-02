@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Automaten.Repos
 {
-    public interface IVendingMachineRepo
+    public interface IProduct
     {
     }
 }
